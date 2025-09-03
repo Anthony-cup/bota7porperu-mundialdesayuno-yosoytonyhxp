@@ -23,6 +23,72 @@
       overflow-x: hidden;
     }
 
+    /* LANGUAGE MODAL */
+    .language-modal {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .language-modal-content {
+      background: linear-gradient(145deg, #1a1a1a, #000);
+      border: 2px solid #ffd700;
+      border-radius: 15px;
+      max-width: 300px;
+      width: 90%;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      animation: slideUpModal 0.5s ease forwards;
+    }
+
+    @keyframes slideUpModal {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .language-modal select {
+      padding: 10px;
+      width: 100%;
+      background: #000;
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      color: #ffd700;
+      font-weight: bold;
+      font-size: 1em;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .language-modal select:hover {
+      background: #1a1a1a;
+    }
+
+    .language-modal button {
+      padding: 10px 20px;
+      background: linear-gradient(45deg, #ffd700, #ffed4e);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .language-modal button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    }
+
     /* PARTICLES */
     .floating-particles {
       position: fixed;
@@ -47,72 +113,6 @@
     @keyframes float {
       0%, 100% { transform: translateY(0); opacity: 0.4; }
       50% { transform: translateY(-15px); opacity: 1; }
-    }
-
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: #fff;
-      border-radius: 15px;
-      max-width: 90vw;
-      max-height: 80vh;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      overflow: hidden;
-    }
-
-    .modal-iframe {
-      width: 100%;
-      height: 90%;
-      border: none;
-      border-radius: 10px 10px 0 0;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ffd700;
-      color: #000;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .modal-close:hover {
-      transform: scale(1.1);
-    }
-
-    .modal-fallback {
-      text-align: center;
-      padding: 10px;
-      background: #1a1a1a;
-      color: #ffd700;
-      border-radius: 0 0 10px 10px;
-    }
-
-    .modal-fallback a {
-      color: #ffd700;
-      text-decoration: underline;
-      font-weight: bold;
     }
 
     /* PROFILE HEADER */
@@ -358,6 +358,13 @@
       gap: 15px;
     }
 
+    .button-label {
+      font-size: 0.9em;
+      color: #ffd700;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
     .social-button {
       display: flex;
       align-items: center;
@@ -373,9 +380,9 @@
       animation: buttonSlideUp 0.6s ease forwards;
     }
 
-    .social-button:nth-child(1) { animation-delay: 1.5s; }
-    .social-button:nth-child(2) { animation-delay: 1.7s; }
-    .social-button:nth-child(3) { animation-delay: 1.9s; }
+    .social-button:nth-child(2) { animation-delay: 1.5s; }
+    .social-button:nth-child(4) { animation-delay: 1.7s; }
+    .social-button:nth-child(6) { animation-delay: 1.9s; }
 
     @keyframes buttonSlideUp {
       from { transform: translateY(20px); opacity: 0; }
@@ -428,9 +435,42 @@
       50% { opacity: 1; transform: scale(1); }
     }
 
+    /* MUTE BUTTON */
+    .mute-button {
+      position: fixed;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(45deg, #1a1a1a, #000);
+      border: 2px solid #ffd700;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .mute-button:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    }
+
+    .mute-icon {
+      width: 20px;
+      height: 20px;
+      fill: #ffd700;
+    }
+
     /* MOBILE OPTIMIZATION */
     @media (max-width: 480px) {
       body { padding: 15px 10px; }
+      .language-modal-content { max-width: 280px; padding: 15px; }
+      .language-modal select { font-size: 0.9em; }
+      .language-modal button { padding: 8px 15px; font-size: 0.9em; }
       .profile-pic { width: 90px; height: 90px; }
       .creator-name { font-size: 1.3em; }
       .vs-container { gap: 15px; padding: 15px; }
@@ -443,33 +483,52 @@
       .card { padding: 20px 15px; }
       .social-button { padding: 14px 18px; font-size: 0.95em; }
       .social-icon { width: 20px; height: 20px; }
-      .modal-content { max-width: 95vw; max-height: 85vh; }
+      .mute-button { width: 35px; height: 35px; }
+      .mute-icon { width: 18px; height: 18px; }
     }
 
     @media (max-width: 350px) {
+      .language-modal-content { max-width: 260px; padding: 12px; }
       .vs-container { gap: 10px; padding: 12px; }
       .flag-image { width: 60px; height: 45px; }
       .vs-text { font-size: 1.8em; }
       .message-section { padding: 12px 10px; }
       .card { max-width: 95vw; padding: 18px 12px; }
       .social-button { padding: 12px 15px; gap: 10px; }
+      .mute-button { width: 30px; height: 30px; }
+      .mute-icon { width: 16px; height: 16px; }
     }
   </style>
 </head>
 <body>
-  <!-- PARTICLES -->
-  <div class="floating-particles"></div>
+  <!-- AUDIO PLAYER -->
+  <audio id="backgroundAudio" src="mus/1.mp4" preload="auto" style="display: none;"></audio>
 
-  <!-- MODAL -->
-  <div class="modal" id="socialModal">
-    <div class="modal-content">
-      <iframe class="modal-iframe" src=""></iframe>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-fallback">
-        ¿No se carga el contenido? <a href="#" id="fallbackLink" target="_blank">Abrir en nueva pestaña</a>
-      </div>
+  <!-- MUTE BUTTON -->
+  <button class="mute-button" onclick="toggleMute()" title="Toggle Mute">
+    <svg id="muteIcon" class="mute-icon" viewBox="0 0 24 24">
+      <path d="M11.5 5v14l-7-7H2v-4h2.5l7-7zm4.5 2.5l-1.4 1.4 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4-2.1-2.1 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1z"/>
+    </svg>
+  </button>
+
+  <!-- LANGUAGE MODAL -->
+  <div class="language-modal" id="languageModal">
+    <div class="language-modal-content">
+      <h2 style="color: #ffd700; margin-bottom: 15px;">Escoge tu idioma</h2>
+      <select id="languageSelect">
+        <option value="es">Español (Perú)</option>
+        <option value="en">English (USA)</option>
+        <option value="fr">Français (France)</option>
+        <option value="pt">Português (Brasil)</option>
+        <option value="de">Deutsch (Deutschland)</option>
+        <option value="it">Italiano (Italia)</option>
+      </select>
+      <button onclick="changeLanguage()">Confirmar</button>
     </div>
   </div>
+
+  <!-- PARTICLES -->
+  <div class="floating-particles"></div>
 
   <!-- PROFILE HEADER -->
   <div class="profile-header">
@@ -483,18 +542,18 @@
     
     <!-- TIKTOK BUTTON -->
     <div class="my-tiktok">
-      <a href="https://www.tiktok.com/@yosoytonyhxp?_t=ZS-8zQXEvDLv4k&_r=1" class="my-tiktok-btn" onclick="openModal(this.href); return false;">
+      <a href="https://www.tiktok.com/@yosoytonyhxp?_t=ZS-8zQXEvDLv4k&_r=1" class="my-tiktok-btn" onclick="abrirPopup(this.href); return false;">
         <svg class="tiktok-icon" viewBox="0 0 24 24">
           <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43V7.83a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.26"/>
         </svg>
-        Mi TikTok
+        <span data-i18n="tiktok-text">Mi TikTok</span>
       </a>
     </div>
   </div>
 
   <!-- VS SECTION -->
   <div class="vs-section">
-    <div class="competition-title">🏆 CONCURSO DE COMIDA 🏆</div>
+    <div class="competition-title" data-i18n="competition-title">🏆 CONCURSO DE COMIDA 🏆</div>
     <div class="vs-container">
       <div class="country-flag">
         <img src="https://flagcdn.com/w320/pe.png" alt="Bandera de Perú" class="flag-image peru-flag">
@@ -512,9 +571,8 @@
 
   <!-- MESSAGE SECTION -->
   <div class="message-section">
-    <div class="message">
-      ¡Apoya a Perú en el concurso de comida de países! <br>
-      Vota más rápido en los comentarios para apoyar a nuestra tierra 
+    <div class="message" data-i18n="message">
+      Apoye a Perú en el concurso de comida de países <br> Vota más rápido en los de Ibai de los 3 redes sociales 
       <span class="flag-emoji">🇵🇪</span><span class="flag-emoji">🔥</span>
     </div>
   </div>
@@ -522,61 +580,155 @@
   <!-- BUTTON CARD -->
   <div class="card">
     <div class="button-box">
-      <button class="social-button tiktok" onclick="openModal('https://vt.tiktok.com/ZSAtTatrb/')">
+      <div class="button-label">Link directo del comentario de Ibai en TikTok</div>
+      <button class="social-button tiktok" onclick="abrirPopup('https://vt.tiktok.com/ZSAtTatrb/')">
         <svg class="social-icon" viewBox="0 0 24 24">
           <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43V7.83a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.26"/>
         </svg>
-        Abrir TikTok
+        <span data-i18n="tiktok-button">Abrir TikTok</span>
       </button>
       
-      <button class="social-button instagram" onclick="openModal('https://www.instagram.com/reel/DOJcwO-DOnC/?igsh=MWs1a2tuemticmMwNQ==')">
+      <div class="button-label">Link directo del comentario de Ibai en Instagram</div>
+      <button class="social-button instagram" onclick="abrirPopup('https://www.instagram.com/reel/DOJcwO-DOnC/?igsh=MWs1a2tuemticmMwNQ==')">
         <svg class="social-icon" viewBox="0 0 24 24">
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
         </svg>
-        Abrir Instagram
+        <span data-i18n="instagram-button">Abrir Instagram</span>
       </button>
       
-      <button class="social-button youtube" onclick="openModal('https://youtube.com/shorts/vUADB2TmIo4?si=ltXyawL-NT_Xutmd')">
+      <div class="button-label">Link directo del comentario de Ibai en YouTube</div>
+      <button class="social-button youtube" onclick="abrirPopup('https://youtube.com/shorts/vUADB2TmIo4?si=ltXyawL-NT_Xutmd')">
         <svg class="social-icon" viewBox="0 0 24 24">
           <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
         </svg>
-        Abrir YouTube
+        <span data-i18n="youtube-button">Abrir YouTube</span>
       </button>
     </div>
   </div>
 
   <script>
-    // Open modal with iframe
-    function openModal(url) {
-      const modal = document.getElementById('socialModal');
-      const iframe = modal.querySelector('.modal-iframe');
-      const fallbackLink = modal.querySelector('#fallbackLink');
-      iframe.src = url;
-      fallbackLink.href = url;
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
-    }
-
-    // Close modal
-    function closeModal() {
-      const modal = document.getElementById('socialModal');
-      const iframe = modal.querySelector('.modal-iframe');
-      iframe.src = ''; // Clear iframe to stop content
-      modal.style.display = 'none';
-      document.body.style.overflow = ''; // Restore scrolling
-    }
-
-    // Close modal when clicking outside
-    document.getElementById('socialModal').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('socialModal')) {
-        closeModal();
+    // Language translations
+    const translations = {
+      es: {
+        'competition-title': '🏆 CONCURSO DE COMIDA 🏆',
+        'message': 'Apoye a Perú en el concurso de comida de países <br> Vota más rápido en los de Ibai de los 3 redes sociales <span class="flag-emoji">🇵🇪</span><span class="flag-emoji">🔥</span>',
+        'tiktok-button': 'Abrir TikTok',
+        'instagram-button': 'Abrir Instagram',
+        'youtube-button': 'Abrir YouTube',
+        'tiktok-text': 'Mi TikTok',
+        'language-prompt': 'Escoge tu idioma'
+      },
+      en: {
+        'competition-title': '🏆 FOOD CONTEST 🏆',
+        'message': 'Support Peru in the international food contest! <br> Vote quickly in Ibai\'s posts on the 3 social networks <span class="flag-emoji">🇵🇪</span><span class="flag-emoji">🔥</span>',
+        'tiktok-button': 'Open TikTok',
+        'instagram-button': 'Open Instagram',
+        'youtube-button': 'Open YouTube',
+        'tiktok-text': 'My TikTok',
+        'language-prompt': 'Choose your language'
+      },
+      fr: {
+        'competition-title': '🏆 CONCOURS CULINAIRE 🏆',
+        'message': 'Soutenez le Pérou dans le concours culinaire international ! <br> Votez rapidement dans les publications d\'Ibai sur les 3 réseaux sociaux <span class="flag-emoji">🇵🇪</span><span class="flag-emoji">🔥</span>',
+        'tiktok-button': 'Ouvrir TikTok',
+        'instagram-button': 'Ouvrir Instagram',
+        'youtube-button': 'Ouvrir YouTube',
+        'tiktok-text': 'Mon TikTok',
+        'language-prompt': 'Choisissez votre langue'
+      },
+      pt: {
+        'competition-title': '🏆 CONCURSO CULINÁRIO 🏆',
+        'message': 'Apoie o Peru no concurso culinário internacional! <br> Vote rapidamente nas postagens do Ibai nas 3 redes sociais <span class="flag-emoji">🇵🇪</span><span class="flag-emoji">🔥</span>',
+        'tiktok-button': 'Abrir TikTok',
+        'instagram-button': 'Abrir Instagram',
+        'youtube-button': 'Abrir YouTube',
+        'tiktok-text': 'Meu TikTok',
+        'language-prompt': 'Escolha seu idioma'
+      },
+      de: {
+        'competition-title': '🏆 KOCHWETTBEWERB 🏆',
+        'message': 'Unterstützen Sie Peru im internationalen Kochwettbewerb! <br> Stimmen Sie schnell in Ibais Beiträgen auf den 3 sozialen Netzwerken ab <span class="flag-emoji">🇵🇪</span><span class="flag-emoji">🔥</span>',
+        'tiktok-button': 'TikTok öffnen',
+        'instagram-button': 'Instagram öffnen',
+        'youtube-button': 'YouTube öffnen',
+        'tiktok-text': 'Mein TikTok',
+        'language-prompt': 'Wählen Sie Ihre Sprache'
+      },
+      it: {
+        'competition-title': '🏆 CONCORSO CULINARIO 🏆',
+        'message': 'Sostieni il Perù nel concorso culinario internazionale! <br> Vota rapidamente nei post di Ibai sui 3 social network <span class="flag-emoji">🇵🇪</span><span class="flag-emoji">🔥</span>',
+        'tiktok-button': 'Apri TikTok',
+        'instagram-button': 'Apri Instagram',
+        'youtube-button': 'Apri YouTube',
+        'tiktok-text': 'Il mio TikTok',
+        'language-prompt': 'Scegli la tua lingua'
       }
-    });
+    };
+
+    // Audio fade-in function
+    function fadeInAudio(audio, duration) {
+      audio.volume = 0;
+      audio.play().catch(error => console.log('Error al reproducir audio:', error));
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = (timestamp - startTime) / duration;
+        audio.volume = Math.min(progress, 1);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Toggle mute function
+    function toggleMute() {
+      const audio = document.getElementById('backgroundAudio');
+      const muteIcon = document.getElementById('muteIcon');
+      if (audio.muted) {
+        audio.muted = false;
+        audio.volume = 1;
+        muteIcon.innerHTML = '<path d="M11.5 5v14l-7-7H2v-4h2.5l7-7zm4.5 2.5l-1.4 1.4 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4-2.1-2.1 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1z"/>';
+      } else {
+        audio.muted = true;
+        muteIcon.innerHTML = '<path d="M11.5 5v14l-7-7H2v-4h2.5l7-7z"/>';
+      }
+    }
+
+    // Change language and play audio
+    function changeLanguage() {
+      const select = document.getElementById('languageSelect');
+      const language = select.value;
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        element.innerHTML = translations[language][element.getAttribute('data-i18n')];
+      });
+      document.documentElement.lang = language;
+      
+      // Play audio with fade-in
+      const audio = document.getElementById('backgroundAudio');
+      if (!audio.muted) {
+        fadeInAudio(audio, 3000); // 3-second fade-in
+      }
+      
+      // Close language modal
+      document.getElementById('languageModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // Open popup with responsive dimensions
+    function abrirPopup(url) {
+      const width = Math.min(400, window.innerWidth - 40);
+      const height = Math.min(600, window.innerHeight - 40);
+      const left = (screen.width - width) / 2;
+      const top = (screen.height - height) / 2;
+      window.open(url, 'popup', `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`);
+    }
 
     // Create floating particles
     function createParticles() {
       const particlesContainer = document.querySelector('.floating-particles');
-      const particleCount = window.innerWidth <= 480 ? 10 : 15;
+      const particleCount = window.innerWidth <= 480 ? 8 : 12;
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -589,12 +741,17 @@
     }
 
     // Initialize on load
-    document.addEventListener('DOMContentLoaded', createParticles);
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      // Language modal is shown by default
+      document.body.style.overflow = 'hidden'; // Prevent scrolling until language is selected
+      document.querySelector('.language-modal h2').innerHTML = translations['es']['language-prompt'];
+    });
 
     // Touch feedback for mobile
-    document.querySelectorAll('.social-button, .my-tiktok-btn').forEach(element => {
-      element.addEventListener('touchstart', () => element.style.transform = 'scale(0.95)');
-      element.addEventListener('touchend', () => setTimeout(() => element.style.transform = '', 150));
+    document.querySelectorAll('.social-button, .my-tiktok-btn, .mute-button').forEach(element => {
+      element.addEventListener('touchstart', () => element.style.transform = element.classList.contains('mute-button') ? 'translateY(-50%) scale(0.95)' : 'scale(0.95)');
+      element.addEventListener('touchend', () => setTimeout(() => element.style.transform = element.classList.contains('mute-button') ? 'translateY(-50%)' : '', 150));
     });
   </script>
 </body>
